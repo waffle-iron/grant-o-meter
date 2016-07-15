@@ -1,0 +1,45 @@
+html, body { height: 100% }
+body    { background-color:#faa; }
+tr,td { padding:0px;
+        border:0;
+      }
+
+.gm-max-height { height: 100%;
+                 min-height:650px;
+                }
+
+#gm-logo {
+            background:#000 url('/static/grantometer72.png') no-repeat;
+            background-position: center center;
+            margin-left:0%;
+            border-bottom:1px solid #300
+         }
+
+.gm-meter { background-color:#fff;
+            height:100%;
+            
+            border-left:1px solid #300;
+            border-bottom:1px solid #300}
+.gm-comment { background-color:#600;
+            height:100%;
+            margin-left:0%;
+            border-right:1px solid #300;
+            border-bottom:1px solid #300}
+#gm-the-meter { height:100%;
+                width:100%;
+              }
+#gm-scale-top {
+                height: 65%;
+                text-align:center;
+                vertical-align:bottom;
+}
+#gm-buttons {
+                    height:30%;
+                    text-align:center;
+                    vertical-align:top;
+                    border-top:0px;
+                 }
+#gm-plus { text-align:left; }
+#gm-minus { text-align:right; }
+#gm-center {width:120px;}
+
