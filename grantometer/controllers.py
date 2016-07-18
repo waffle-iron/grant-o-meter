@@ -8,34 +8,32 @@ class GrumpyControl:
         self.timestamp = None
 
     def increase_grumpyness(self):
-        if self.grumpyness > 500:
-            self.grumpyness = 1000
+        if self.grumpyness > 50:
+            self.grumpyness = 110
         elif self.grumpyness > 0:
             self.grumpyness = self.grumpyness * 2
         else:
             self.grumpyness = 1
 
     def decrease_grumpyness(self):
-        if self.grumpyness > 0 and self.grumpyness <= 1000:
-            self.grumpyness = self.grumpyness - 50
-        elif self.grumypness > 1000:
-            self.grumpyness = 950
+        if self.grumpyness > 0:
+            if self.grumpyness <= 100:
+                self.grumpyness = self.grumpyness - 6.25
+            else:
+                self.grumpyness = 100
 
     def cool_down_grumpyness(self, now):
         action_timestamp = dateutil.parser.parse(now)
         delta_t = action_timestamp - self.timestamp
-        print(delta_t)
-        if delta_t.days > 0 or delta_t.seconds > 43200:
+        hours = delta_t.seconds // 3600 + delta_t.days * 24
+        if hours > 12:
             self.grumpyness = 0
-        elif delta_t.seconds > 39600:
-            self.grumpyness = 1
         else:
-            houres = delta_t.seconds // 3600
-            new_grumpyness = self.grumpyness - houres * (10 + houres)
+            new_grumpyness = self.grumpyness - hours * hours * 0.75
             if new_grumpyness > 0:
                 self.grumpyness = new_grumpyness
             else:
-                self.grumpyness = 2
+                new_grumpyness = 0
 
     def query_grumpyness():
         pass
