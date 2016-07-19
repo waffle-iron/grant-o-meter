@@ -89,4 +89,7 @@ ENV/
 .ropeproject
 
 # temp
-*.swp# tem*.swp# tem*.swp
+*.swp
+
+# DB
+*.db# D*.db# D*.db
