@@ -1,14 +1,15 @@
 from grantometer import db
 import datetime
 
-class Grumpyness(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    grumpyness = db.Column(db.Float)
+
+class Grumpiness(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    grumpiness = db.Column(db.Float)
     timestamp = db.Column(db.DateTime)
 
-    def __init__(self, grumpyness):
-        self.grumpyness = grumpyness
-        self.timestamp = datetime.datetime.now()
+    def __init__(self, grumpiness, timestamp=datetime.datetime.now()):
+        self.grumpiness = grumpiness
+        self.timestamp = timestamp
 
     def __repr__(self):
-        return 'Grumpyness %r at %r' % (self.grumpyness, self.timestamp)
+        return 'Grumpiness %s at %s' % (self.grumpiness, self.timestamp)

@@ -3,61 +3,48 @@ from grantometer import controllers
 import dateutil.parser
 
 
-class ControllerTests(unittest.TestCase):
-    def test_increase_grumpyness_from_zero(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 0
-        gt.increase_grumpyness()
-        self.assertEqual(1, gt.grumpyness, 'Grumpyness from zero')
+class GrumpyControllerTests(unittest.TestCase):
+    def test_increase_grumpiness_from_zero(self):
+        self.assertEqual(1, controllers.increase_grumpiness(0),
+                         'Grumpyness from zero')
 
-    def test_increase_grumpyness_from_255(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 73
-        gt.increase_grumpyness()
-        self.assertEqual(110, gt.grumpyness, 'Grumpyness from 73')
+    def test_increase_grumpiness_from_73(self):
+        self.assertEqual(110, controllers.increase_grumpiness(73),
+                         'Grumpyness from 73')
 
-    def test_increase_grumpyness_to_max(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 50
-        gt.increase_grumpyness()
-        self.assertEqual(100, gt.grumpyness, 'Grumpyness to 100')
+    def test_increase_grumpiness_to_max(self):
+        self.assertEqual(100, controllers.increase_grumpiness(50),
+                         'Grumpyness to 100')
 
-    def test_decrease_grumpyness(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 800
-        gt.decrease_grumpyness()
-        self.assertEqual(100, gt.grumpyness)
+    def test_decrease_grumpiness(self):
+        self.assertEqual(100, controllers.decrease_grumpiness(800))
 
-    def test_decrease_grumpyness_regular(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 73
-        gt.decrease_grumpyness()
-        self.assertEqual(66.75, gt.grumpyness)
+    def test_decrease_grumpiness_regular(self):
+        self.assertEqual(66.75, controllers.decrease_grumpiness(73))
 
     def test_cool_down_3h(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 51
-        gt.timestamp = dateutil.parser.parse("2016-07-16T13:00:00Z")
-        gt.cool_down_grumpyness("2016-07-16T16:00:00Z")
-        self.assertEqual(44.25, gt.grumpyness)
+        test = controllers.cool_down_grumpiness(51,  dateutil.parser.parse(
+                                                    "2016-07-16T16:00:00Z"),
+                                                     dateutil.parser.parse(
+                                                     "2016-07-16T13:00:00Z"))
+        self.assertEqual(44.25, test)
 
     def test_cool_down_12h00m(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 110
-        gt.timestamp = dateutil.parser.parse("2016-07-16T04:00:00Z")
-        gt.cool_down_grumpyness("2016-07-16T16:00:00Z")
-        self.assertEqual(2, gt.grumpyness)
+        test = controllers.cool_down_grumpiness(110,  dateutil.parser.parse(
+                                                        "2016-07-16T16:00:00Z"),
+            dateutil.parser.parse("2016-07-16T04:00:00Z"))
+        self.assertEqual(2, test)
 
     def test_cool_down_24h00(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 100
-        gt.timestamp = dateutil.parser.parse("2016-07-15T16:00:00Z")
-        gt.cool_down_grumpyness("2016-07-16T16:00:00Z")
-        self.assertEqual(0, gt.grumpyness)
+        test = controllers.cool_down_grumpiness(100,  dateutil.parser.parse(
+                                                        "2016-07-16T16:00:00Z"),
+                                                      dateutil.parser.parse(
+                                                      "2016-07-15T16:00:00Z"))
+        self.assertEqual(0, test)
 
     def test_cool_down_7h00(self):
-        gt = controllers.GrumpyControl()
-        gt.grumpyness = 100
-        gt.timestamp = dateutil.parser.parse("2016-07-15T06:00:00Z")
-        gt.cool_down_grumpyness("2016-07-15T16:00:00Z")
-        self.assertEqual(25, gt.grumpyness)
+        test = controllers.cool_down_grumpiness(100,  dateutil.parser.parse(
+                                                        "2016-07-15T16:00:00Z"),
+                                                      dateutil.parser.parse(
+                                                      "2016-07-15T06:00:00Z"))
+        self.assertEqual(25, test)

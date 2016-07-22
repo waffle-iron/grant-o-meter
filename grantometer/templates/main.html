@@ -42,53 +42,8 @@
                         <td></td>
                         <td>
                            <canvas id="myCanvas" width="120" height="500" style="border:0px;border-radius: 50px 50px 0px 0px;text-align:center">
-                                <script>
-                                    var dGrant = 1;
-                                    var grantigkeit = null;
-                                    console.log(grantigkeit);
-
-                                    function drawGrantOMeter() {
-                                        ctx.clearRect(0,0,120,500);
-                                        ctx.fillRect(0,500 - grantigkeit,120,500);
-                                        console.log(grantigkeit);
-                                    }
-                                    function increasGrantigkeit() {
-                                        if (grantigkeit <= 250) {
-                                            grantigkeit = grantigkeit * 2;
-                                        }
-                                        if (grantigkeit > 250 && grantigkeit < 500) {
-                                            grantigkeit = 500; 
-                                        }
-                                        if (grantigkeit <= 0) {
-                                           grantigkeit = 1;
-                                        }
-                                        dGrant = 1;
-                                        drawGrantOMeter(grantigkeit);
-                                    }
-                                    function decreaseGrantigkeit() {
-                                        if (grantigkeit > 10 && grantigkeit <= 500) {
-                                            grantigkeit = grantigkeit - dGrant * 2;
-                                            dGrant += 1;
-                                        }
-                                        if (grantigkeit <= 10 && grantigkeit > 1) {
-                                            grantigkeit -= 1;
-                                            dGrant = 1;
-                                        }
-                                        drawGrantOMeter(grantigkeit);
-                                    }
-                                    var c = document.getElementById("myCanvas");
-                                    var ctx = c.getContext("2d");
-                                    // Create gradient
-                                    var grd = ctx.createLinearGradient(0,600,0,0);
-                                    grd.addColorStop(0,"green");
-                                    grd.addColorStop(0.1,"yellow");
-                                    grd.addColorStop(1,"red");
-                                    // Fill with gradient
-                                    ctx.fillStyle = grd;
-                                    console.log("...");
+                                <script src="/static/grantometer.js">
                                     
-                                    drawGrantOMeter(grantigkeit);
-
                                 </script>
                                 Your browser does not support the HTML5 canvas tag.
                                 </canvas>
@@ -104,7 +59,9 @@
                 </table>
             </div>
             <div class="two columns gm-max-height" id="gm-logo"></div>
-            <div class="five columns gm-comment">a</div>
+            <div class="five columns gm-comment" style="color: #fff">
+                <h1>Share the grumpiness!</h1>
+            </div>
         </div>
         The GRANT-O-METER &copy; 2016 Team R.E.D.
     </div>

@@ -12,21 +12,21 @@ class ModelTests(unittest.TestCase):
             db.create_all()
 
     def test_write_grumpy_DB(self):
-        num_entries = models.Grumpyness.query.count()
-        gd = models.Grumpyness(10)
-        g1d = models.Grumpyness(80)
+        num_entries = models.Grumpiness.query.count()
+        gd = models.Grumpiness(10)
+        g1d = models.Grumpiness(80)
         db.session.add(g1d)
         db.session.add(gd)
         db.session.commit()
-        gd2 = models.Grumpyness.query.all()
+        gd2 = models.Grumpiness.query.all()
         assert len(gd2) == 2 + num_entries
 
     def test_read_last_in_bulk(self):
-        objects =  [models.Grumpyness(2),
-                    models.Grumpyness(3),
-                    models.Grumpyness(50)]
+        objects =  [models.Grumpiness(2),
+                    models.Grumpiness(3),
+                    models.Grumpiness(50)]
         db.session.bulk_save_objects(objects)
-        gd = db.session.query(models.Grumpyness).order_by(
-                            models.Grumpyness.id.desc()).first()
-        assert gd.grumpyness == 50
+        gd = db.session.query(models.Grumpiness).order_by(
+                            models.Grumpiness.id.desc()).first()
+        assert gd.grumpiness == 50
 
