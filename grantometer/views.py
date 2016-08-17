@@ -1,21 +1,13 @@
 from grantometer import app
-from flask import render_template, jsonify, request, Response, json
+from flask import render_template, jsonify, request
 from grantometer import models
 from grantometer import controllers
 from grantometer import db
 import datetime
-import gevent
-from gevent import monkey
-monkey.patch_all()
 
 
 @app.route('/setup')
 def setup():
-    with app.app_context():
-        db.create_all()
-    new_entry = models.Grumpiness(0, datetime.datetime.now())
-    db.session.add(new_entry)
-    db.session.commit()
     return "S'all good man"
 
 
@@ -58,20 +50,3 @@ def manage_grumpiness():
         print('Get request: %s at %s - %s' % (grumpiness, gc.timestamp, timestamp) )
     return jsonify(grumpiness=grumpiness)
 
-
-def event():
-    while True:
-        timestamp = datetime.datetime.now()
-        gc = db.session.query(models.Grumpiness).order_by(
-                           models.Grumpiness.id.desc()).first()
-        grumpiness = controllers.cool_down_grumpiness(gc.grumpiness,
-                            timestamp,
-                            gc.timestamp)
-        yield str('event: update_grumpiness\n' + 'data: ' + json.dumps(grumpiness) + '\n\n')
-        gevent.sleep(0.2)
-
-
-
-@app.route('/grumpy/stream/v1_1', methods=['GET', 'POST'])
-def stream():
-    return Response(event(), mimetype="text/event-stream")
