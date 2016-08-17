@@ -69,15 +69,16 @@ grd.addColorStop(1,"red");
 // Fill with gradient
 ctx.fillStyle = grd;
 
-function initializeGrantometer() {
+function refreshGrantometer() {
     GetGrumpiness(window.location.href, API_VERSITON,
         function(err, data) {
             if (err != null) {
                 alert('Something went wrong: ' + err);
-                drawGrantOMeter(0); 
+                drawGrantOMeter(0);
             } else {
                 drawGrantOMeter(data.grumpiness);
             }
          });
+    setTimeout(refreshGrantometer, 2000);
 }
-initializeGrantometer();
+refreshGrantometer();
