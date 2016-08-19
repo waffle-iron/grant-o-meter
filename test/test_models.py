@@ -24,9 +24,9 @@ class ModelTests(unittest.TestCase):
     def test_read_last_in_bulk(self):
         objects =  [models.Grumpiness(2),
                     models.Grumpiness(3),
-                    models.Grumpiness(50)]
+                    models.Grumpiness(50, "myId")]
         db.session.bulk_save_objects(objects)
         gd = db.session.query(models.Grumpiness).order_by(
                             models.Grumpiness.id.desc()).first()
         assert gd.grumpiness == 50
-
+        assert gd.guid == "myId"

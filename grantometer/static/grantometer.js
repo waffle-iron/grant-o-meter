@@ -1,10 +1,45 @@
 const GAUGE_SIZE = 500;
 const API_SCALE = 110;
-const API_VERSITON = 'v1_0';
+const API_VERSITON = 'v1_1';
+const MY_URL = window.location.href;
+
+function GetGrumpinessID(myUrl, apiVersion, callback) {
+    var client = new XMLHttpRequest();
+    client.open("GET", myUrl + 'api/' + apiVersion + '/grumpyID/', true);
+    client.responseType = 'json';
+    client.onload = function() {
+        if (client.status == 200) {
+            callback(null, client.response);
+        } else {
+            callback(client.status);
+        }
+    };
+    client.send();
+}
+
+function getStoredUID() {
+    var UUID = null;
+    if (localStorage.getItem('grantometerUID')) 
+    {
+        UUID = localStorage.getItem('grantometerUID');
+    } 
+    else {
+        GetGrumpinessID(MY_URL, API_VERSITON,
+            function(err, data) {
+                if (err != null) {
+                    alert('Something went wrong: ' + err);
+                } else {
+                    console.log(data.guid);
+                    localStorage.setItem('grantometerUID', data.guid);
+                }
+             });
+    }
+    return UUID;
+}
 
 function GetGrumpiness(myUrl, apiVersion, callback) {
     var client = new XMLHttpRequest();
-    client.open("GET", myUrl + 'grumpy/api/' + apiVersion, true);
+    client.open("GET", myUrl + 'api/' + apiVersion + '/grumpy/', true);
     client.responseType = 'json';
     client.onload = function() {
         if (client.status == 200) {
@@ -18,7 +53,7 @@ function GetGrumpiness(myUrl, apiVersion, callback) {
 
 function PostGrumpiness(myUrl, apiVersion, callback, action) {
     var client = new XMLHttpRequest();
-    client.open("POST", myUrl + 'grumpy/api/' + apiVersion, true);
+    client.open("POST", myUrl +  'api/' + apiVersion + '/grumpy/', true);
     client.responseType = 'json';
     client.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     client.onload = function() {
@@ -28,7 +63,7 @@ function PostGrumpiness(myUrl, apiVersion, callback, action) {
             callback(client.status);
         }
     };
-    client.send(JSON.stringify({"action" : action}));
+    client.send(JSON.stringify({"action" : action, "guid" : getStoredUID()}));
 }
 
 function drawGrantOMeter(grumpy) {
@@ -38,7 +73,7 @@ function drawGrantOMeter(grumpy) {
 }
 
 function increasGrantigkeit() {
-    PostGrumpiness(window.location.href, API_VERSITON, function(err, data){
+    PostGrumpiness(MY_URL, API_VERSITON, function(err, data){
         if (err != null) {
             alert('Something went wrong ' + err);
             drawGrantOMeter(60);
@@ -49,7 +84,7 @@ function increasGrantigkeit() {
 }
 
 function decreaseGrantigkeit() {
-    PostGrumpiness(window.location.href, API_VERSITON, function(err, data){
+    PostGrumpiness(MY_URL, API_VERSITON, function(err, data){
         if (err != null) {
             alert('Something went wrong ' + err);
             drawGrantOMeter(60);
@@ -70,7 +105,7 @@ grd.addColorStop(1,"red");
 ctx.fillStyle = grd;
 
 function refreshGrantometer() {
-    GetGrumpiness(window.location.href, API_VERSITON,
+    GetGrumpiness(MY_URL, API_VERSITON,
         function(err, data) {
             if (err != null) {
                 alert('Something went wrong: ' + err);
@@ -79,6 +114,7 @@ function refreshGrantometer() {
                 drawGrantOMeter(data.grumpiness);
             }
          });
-    setTimeout(refreshGrantometer, 2000);
+    setTimeout(refreshGrantometer, 20000);
 }
 refreshGrantometer();
+console.log(getStoredUID());

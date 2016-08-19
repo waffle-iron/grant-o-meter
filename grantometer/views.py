@@ -1,12 +1,10 @@
 from grantometer import app
-from flask import render_template, jsonify, request, Response, json
+from flask import render_template, jsonify, request
 from grantometer import models
 from grantometer import controllers
 from grantometer import db
 import datetime
-import gevent
-from gevent import monkey
-monkey.patch_all()
+import uuid
 
 
 @app.route('/setup')
@@ -24,14 +22,14 @@ def main_gauge(name=None):
     return render_template('main.html', name=name)
 
 
-@app.route('/grumpy/api/v1_0', methods=['GET', 'POST'])
+@app.route('/api/v1_1/grumpy/', methods=['GET', 'POST'])
 def manage_grumpiness():
     timestamp = datetime.datetime.now()
     gc = db.session.query(models.Grumpiness).order_by(
-                       models.Grumpiness.id.desc()).first()
-    grumpiness  = controllers.cool_down_grumpiness(gc.grumpiness,
-                        timestamp,
-                        gc.timestamp)
+         models.Grumpiness.id.desc()).first()
+    grumpiness = controllers.cool_down_grumpiness(gc.grumpiness,
+                                                  timestamp,
+                                                  gc.timestamp)
     if request.method == 'POST':
         data = request.get_json(force=True)
         try:
@@ -46,32 +44,27 @@ def manage_grumpiness():
                 print("to: %s" % grumpiness)
         except KeyError:
             return jsonify(error="Action ist missing in" +
-                                  " your request")
+                           " your request")
         except:
             return jsonify(error="Whooopsie Daysie")
-        new_entry = models.Grumpiness(grumpiness, timestamp)
-        db.session.add(new_entry)
-        db.session.commit()
-        print(new_entry)
+        try:
+            guid = data['guid']
+        except KeyError:
+            return jsonify(error="Guid missing")
+        except:
+            return jsonify(error="Whooooopsie Daysie! Wrong hole!")
+        try:
+            models.save_new_grumpiness(grumpiness, guid, timestamp)
+            print("Guid %s" % guid)
+        except:
+            return jsonify("DB writign failed")
     elif request.method == 'GET':
         print("GET")
-        print('Get request: %s at %s - %s' % (grumpiness, gc.timestamp, timestamp) )
+        print('Get request: %s at %s - %s' % (grumpiness, gc.timestamp,
+                                              timestamp))
     return jsonify(grumpiness=grumpiness)
 
 
-def event():
-    while True:
-        timestamp = datetime.datetime.now()
-        gc = db.session.query(models.Grumpiness).order_by(
-                           models.Grumpiness.id.desc()).first()
-        grumpiness = controllers.cool_down_grumpiness(gc.grumpiness,
-                            timestamp,
-                            gc.timestamp)
-        yield str('event: update_grumpiness\n' + 'data: ' + json.dumps(grumpiness) + '\n\n')
-        gevent.sleep(0.2)
-
-
-
-@app.route('/grumpy/stream/v1_1', methods=['GET', 'POST'])
-def stream():
-    return Response(event(), mimetype="text/event-stream")
+@app.route('/api/v1_1/grumpyID/', methods=['GET'])
+def send_uuid():
+    return jsonify(guid=uuid.uuid4())
