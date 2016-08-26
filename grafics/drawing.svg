@@ -71,15 +71,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="399.55227"
-     inkscape:cy="599.9803"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="185.39993"
+     inkscape:cy="846.50727"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1397"
+     inkscape:window-width="1398"
      inkscape:window-height="855"
-     inkscape:window-x="43"
+     inkscape:window-x="42"
      inkscape:window-y="1"
      inkscape:window-maximized="1" />
   <metadata
@@ -175,5 +175,35 @@
          d="m 349.51278,53.321339 c 0,0 16.66752,-20.70813 35.35534,-10.10153"
          style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:9.69999981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
+    <circle
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4155"
+       cx="387.87057"
+       cy="195.78079"
+       r="52.499996" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="371.73615"
+       y="193.73254"
+       id="text4157"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4159"
+         x="371.73615"
+         y="193.73254"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:Phosphate;-inkscape-font-specification:Phosphate;fill:#ffffff" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="359.61432"
+       y="255.35185"
+       id="text4161"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4163"
+         x="359.61432"
+         y="255.35185"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:Phosphate;-inkscape-font-specification:Phosphate;fill:#ffffff">-</tspan></text>
   </g>
 </svg>

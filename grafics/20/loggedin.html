@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>GRANT-O-METER</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="skeleton.css">
+  <link rel="stylesheet" href="grumpy.css">
+
+</head>
+<body>
+
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="red-center-gradient">
+        <div class="container">
+            <div class="row">
+                <div class="six columns">
+                     <table id="gm-the-meter">
+                     <tr id="gm-scale-top">
+                        <td id="gm-minus"><a href="javascript:;" onClick="decreaseGrantigkeit();" class="gm-button-minus"></a></td>
+                        <td>
+                            <canvas id="GrantOMeterCanvas" width="100" height="500"></canvas>
+                            <script>
+                                var canvas = document.getElementById('GrantOMeterCanvas');
+                                var context = canvas.getContext("2d");
+                                
+                                context.beginPath();
+                                
+                                context.rect(5, 50, 90, 445);
+                                context.arc(50, 50, 45, 0, Math.PI, true);
+                                
+                                context.globalCompositeOperation = "destination-over";
+                                    
+                                context.fillStyle = "#410000";
+                                context.fill();
+                                context.strokeStyle = "white";
+                                context.lineWidth = 5;
+                                context.stroke();
+                            </script>
+                        </td>
+                        <td id="gm-plus"><a href="javascript:;" onClick="increasGrantigkeit();" class="gm-button-plus"></a></td>
+                    </tr>
+                </table>
+                </div>
+                <div class="six columns">
+                    <div class="top-form">
+                            <h3>How grumpy are you today?</h3>
+                            <form name="login" action="/login" method="post">
+                                <input name="username" type="text" placeholder="why are you grumpy?">
+                                <input name="password" type="text" placeholder="who is to blame">
+                            </form>
+                            <br/><h4>Statistics</h4>
+                            <p>You have 10000000000 records!<br />
+                            Last time your grumpiness was 11, that was 1 seconds ago</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="white">
+        <div class="container">
+            <h1>Last week</h1>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.bundle.min.js"></script>
+            <canvas id="myChart" width="400" height="200"></canvas>
+            <script>
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+                });
+            </script>
+            <div class="rows"><div class="six columns">
+            <h2>Top 10 who's to blame</h2>
+            <canvas id="blame" width="400" height="400" style="border 1px solid #000;"></canvas>
+            <script>
+                var ctx = document.getElementById("blame");
+                var myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+                });
+            </script></div>
+            <div class="six columns">
+            <h2>Top 10 reasons</h2>
+            <canvas id="reason" width="400" height="400" style="border 1px solid #000;"></canvas>
+            <script>
+                var ctx = document.getElementById("reason");
+                var myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+                });
+            </script></div>
+            
+            </div>
+
+            <a href="loggedin.html">LOGIN</a> <a href="dinimuatter.html">NEW PAGE</a>
+       </div>
+    </div>
+    <div class="purple white-text">
+        <div class="container">
+            <!-- columns should be the immediate child of a .row -->
+            <div class="row">
+                <div class="three columns">
+                    <em>Contribute</em><br />
+                    <a href="/signup">Sign up</a><br />
+                    <a href="https://github.com/oguntli/grant-o-meter" >Github</a><br />
+                    <a href="#">Request a feature</a></ br>
+                </div>
+                <div class="three columns">
+                    <em>Boring stuff</em><br />
+                    <a href="/tos" >Terms of use</a><br />
+                    <a href="/privacy">Privacy policy</a><br />
+                    <a href="/contact">Contact us</a>
+                </div>
+                <div class="six columns"><em>About</em></div>
+            </div>   
+        </div>
+    </div>
+    <div class="purple-dark white-text">
+        <div class="container">
+            The GRANT-O-METER &copy; 2016 Team R.E.D.
+        </div>
+    </div>
+
+    <!-- End Document
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

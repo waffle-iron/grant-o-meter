@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>GRANT-O-METER</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="skeleton.css">
+  <link rel="stylesheet" href="grumpy.css">
+
+</head>
+<body>
+
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="red-center-gradient">
+        <div class="container">
+            <div class="row">
+                <div class="six columns">
+                     <table id="gm-the-meter">
+                     <tr id="gm-scale-top">
+                        <td id="gm-minus"><a href="javascript:;" onClick="decreaseGrantigkeit();" class="gm-button-minus"></a></td>
+                        <td>
+                            <canvas id="GrantOMeterCanvas" width="100" height="500"></canvas>
+                            <script>
+                                var canvas = document.getElementById('GrantOMeterCanvas');
+                                var context = canvas.getContext("2d");
+                                
+                                context.beginPath();
+                                
+                                context.rect(5, 50, 90, 445);
+                                context.arc(50, 50, 45, 0, Math.PI, true);
+                                
+                                context.globalCompositeOperation = "destination-over";
+                                    
+                                context.fillStyle = "#410000";
+                                context.fill();
+                                context.strokeStyle = "white";
+                                context.lineWidth = 5;
+                                context.stroke();
+                            </script>
+                        </td>
+                        <td id="gm-plus"><a href="javascript:;" onClick="increasGrantigkeit();" class="gm-button-plus"></a></td>
+                    </tr>
+                </table>
+                </div>
+                <div class="six columns">
+                    <div class="top-form">
+                            <h6><strong>Already a member?</strong> Sign in!</h6>
+                            <form name="login" action="/login" method="post">
+                                <input name="username" id="username" type="text" placeholder="username">
+                                <input name="password" id="password" type="password" placeholder="password">
+                                <input type="submit" value="Login"> <a href="/forgotpw">forgot password?</a>
+                            </form>
+                            <h6><strong>New to Grant-O-Meter?</strong> Sign up!</h6>
+                            <form name="signup" action="/signup" method="post">
+                                <input name="username" type="text" placeholder="username">
+                                <input name="username" type="email" placeholder="email">
+                                <input name="password" type="password" placeholder="password">
+                                <input type="submit" value="Sign up">
+                            </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="orange">
+        <div class="container">
+            balk
+        </div>
+    </div>
+    <div class="purple white-text">
+        <div class="container">
+            <!-- columns should be the immediate child of a .row -->
+            <div class="row">
+                <div class="three columns">
+                    <em>Contribute</em><br />
+                    <a href="/signup">Sign up</a><br />
+                    <a href="https://github.com/oguntli/grant-o-meter" >Github</a><br />
+                    <a href="#">Request a feature</a></ br>
+                </div>
+                <div class="three columns">
+                    <em>Boring stuff</em><br />
+                    <a href="/tos" >Terms of use</a><br />
+                    <a href="/privacy">Privacy policy</a><br />
+                    <a href="/contact">Contact us</a>
+                </div>
+                <div class="six columns"><em>About</em></div>
+            </div>   
+        </div>
+    </div>
+    <div class="purple-dark white-text">
+        <div class="container">
+            The GRANT-O-METER &copy; 2016 Team R.E.D.
+        </div>
+    </div>
+
+    <!-- End Document
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
